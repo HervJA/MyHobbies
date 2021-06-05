@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Bonjour les gars
+                    Bonjour les gars {{auth()->user()->name ?? ''}}
                 </div>
 
                 <div class="links">
