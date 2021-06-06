@@ -33,6 +33,8 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                        <a class="nav-link" href="/">Start</a>
+                        <a class="nav-link" href="/info">Info</a>
 
                     </ul>
 
