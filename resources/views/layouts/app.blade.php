@@ -35,7 +35,7 @@
                     <ul class="navbar-nav mr-auto">
                         <a class="nav-link" href="/">Start</a>
                         <a class="nav-link" href="/info">Info</a>
-
+                        <a class="nav-link" href="/hobby">Hobbies</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
