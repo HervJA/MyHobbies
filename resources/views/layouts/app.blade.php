@@ -36,6 +36,7 @@
                         <a class="nav-link" href="/">Start</a>
                         <a class="nav-link" href="/info">Info</a>
                         <a class="nav-link" href="/hobby">Hobbies</a>
+                        <a class="nav-link" href="/tag">Tags</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
