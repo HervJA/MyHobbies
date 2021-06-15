@@ -33,7 +33,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
+                    @auth
+                        <a class="nav-link" href="/home">Home</a>
+                    @endauth
+                    @guest   
                         <a class="nav-link" href="/">Start</a>
+                    @endguest
                         <a class="nav-link" href="/info">Info</a>
                         <a class="nav-link" href="/hobby">Hobbies</a>
                         <a class="nav-link" href="/tag">Tags</a>
@@ -81,6 +86,14 @@
         <div class="container">
                 <div class="alert alert-success" role="alert">
                     {!! $message_success !!}
+                </div>
+            </div>
+        @endisset
+
+        @isset($message_warning)
+        <div class="container">
+                <div class="alert alert-warning" role="alert">
+                    {!! $message_warning !!}
                 </div>
             </div>
         @endisset

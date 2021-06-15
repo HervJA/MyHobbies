@@ -34,3 +34,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('tag','TagController');
 Route::resource('user','UserController');
 Route::get('/hobby/tag/{tag_id}', 'HobbyTagController@getFilteredHobbies')->name('hobby_tag');
+Route::get('/hobby/{hobby_id}/{tag_id}/attach', 'HobbyTagController@attachTag');
+Route::get('/hobby/{hobby_id}/{tag_id}/detach', 'HobbyTagController@detachTag');
