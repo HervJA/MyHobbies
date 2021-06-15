@@ -12,9 +12,20 @@ class HobbyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+     public function __construct()
     {
-        $hobbies = Hobby::all();
+        $this->middleware ('auth')->except(['index', 'show']);
+    }
+    
+    
+     public function index()
+    {
+        //$hobbies = Hobby::all();
+        //$hobbies = Hobby::paginate(10);
+    
+        $hobbies = Hobby::orderBy('created_at', 'DESC')->paginate(10);
+        
         return view('hobby.index')->with([
             'hobbies'=>$hobbies
         ]);
@@ -47,6 +58,7 @@ class HobbyController extends Controller
         $hobby = new Hobby([
             'name'=>$request['name'],
             'description'=>$request['description'],
+            'user_id'=>auth()->id()
         ]);
         $hobby->save();
         return $this->index()->with(
