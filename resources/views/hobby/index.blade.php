@@ -19,11 +19,16 @@
                         <ul class="list-group">
                             @foreach($hobbies as $hobby)
                                 <li class="list-group-item">
+                                @if(file_exists('img/hobbies/'.$hobby->id.'_thumb.jpg'))
                                     <a title="Show Details" href="/hobby/{{ $hobby->id }}">
-                                        <img src="/img/thumb_landscape.jpg" alt="thumb">
-                                        {{ $hobby->name }}
-                                    </a>
+                                        <img src="/img/hobbies/{{$hobby->id}}_thumb.jpg" alt="Hobby Thumb">
+                                                                           </a>
+                                @endif    
+
+                                &nbsp;<a title="Show Details" href="/hobby/{{ $hobby->id }}">{{ $hobby->name }}</a>
+
                                     @auth
+
                                     <a class="btn btn-sm btn-light ml-2" href="/hobby/{{ $hobby->id }}/edit"><i class="fas fa-edit"></i> Edit Hobby</a>
                                     @endauth
                                     <span class="mx-2">Posted by: <a href="/user/{{ $hobby->user->id }}">{{ $hobby->user->name }} ({{ $hobby->user->hobbies->count() }} Hobbies)</a>

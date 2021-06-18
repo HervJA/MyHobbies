@@ -6,6 +6,7 @@ use App\Hobby;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class HobbyController extends Controller
 {
@@ -54,7 +55,7 @@ class HobbyController extends Controller
         $request->validate([
             'name'=>'required|min:3',
             'description'=>'required|min:5',
-
+            'image'=>'mimes:jpeg,bmp,png,gif,jpg'
         ]);
         
         $hobby = new Hobby([
@@ -62,12 +63,10 @@ class HobbyController extends Controller
             'description'=>$request['description'],
             'user_id'=>auth()->id()
         ]);
+       if ($request->image){
+            $this->saveImages($request->image,$hobby->id);
         $hobby->save();
-        /*return $this->index()->with(
-            [
-                'message_success' => "The hobby ".$hobby->name . "was created."
-            ]
-        );*/
+        
         return redirect("/hobby/".$hobby->id)->with(
             [
             'message_warning' =>"Please add tags to your Hobby"
@@ -75,6 +74,7 @@ class HobbyController extends Controller
         );
         
         }
+    }
     /**
      * Display the specified resource.
      *
@@ -118,9 +118,15 @@ class HobbyController extends Controller
         $request->validate([
             'name'=>'required|min:3',
             'description'=>'required|min:5',
+            'image'=>'mimes:jpeg,bmp,png,gif,jpg'
 
         ]);
         
+        if ($request->image){
+            $this->saveImages($request->image,$hobby->id);
+           
+        }
+
         $hobby->update([
             'name'=>$request['name'],
             'description'=>$request['description'],
@@ -149,4 +155,35 @@ class HobbyController extends Controller
         );    
 
     }
+
+    public function saveImages($imageInput, $hobby_id) {
+        $image = Image::make($imageInput);
+        //landscape images
+        if ($image->width()>$image->height()) {
+            $image->widen(1200)
+                ->save(public_path()."/img/hobbies/".$hobby_id."_large.jpg")
+                ->widen(400)->pixelate(12)
+                ->save(public_path()."/img/hobbies/".$hobby_id."_pixelated.jpg");
+            
+            $image = Image::make($imageInput);
+            $image->widen(60)
+                ->save(public_path()."/img/hobbies/".$hobby_id."_thumb.jpg");
+                        }
+        else {
+            $image->heighten(900)
+            ->save(public_path()."/img/hobbies/".$hobby_id."_large.jpg")
+            ->heighten(400)->pixelate(12)
+            ->save(public_path()."/img/hobbies/".$hobby_id."_pixelated.jpg");
+        
+        $image = Image::make($imageInput);
+        $image->heighten(60)
+            ->save(public_path()."/img/hobbies/".$hobby_id."_thumb.jpg");
+        }
+
+
+
+
+    }
+
+
 }
