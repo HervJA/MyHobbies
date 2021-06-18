@@ -36,3 +36,6 @@ Route::resource('user','UserController');
 Route::get('/hobby/tag/{tag_id}', 'HobbyTagController@getFilteredHobbies')->name('hobby_tag');
 Route::get('/hobby/{hobby_id}/{tag_id}/attach', 'HobbyTagController@attachTag');
 Route::get('/hobby/{hobby_id}/{tag_id}/detach', 'HobbyTagController@detachTag');
+
+//delete images of hobby
+Route::get('delete-images/hobby/{hobby_id}', 'HobbyController@deleteImages');
