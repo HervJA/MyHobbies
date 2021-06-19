@@ -12,7 +12,13 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    
+    public function __construct()
+    {
+        $this->middleware('auth')->except('index');
+    }
+        
+     public function index()
     {
         $tags = Tag::all();
         return view('tag.index')->with([
